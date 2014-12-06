@@ -46,6 +46,10 @@ class PostHandler():
 		img = ImagePost.query.get(id)
 		return str(id) if img else None
 
+	def find_image_info(self,id):
+		img = ImagePost.query.get(id)
+		return [img.name, img.description]
+
 	def add_comment(self,name,text,img_id):
 		db.session.add(ImageComment(name,text,ImagePost.query.get(img_id)))
 		db.session.commit()

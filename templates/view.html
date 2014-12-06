@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block body %}
-	<h1>This is your image.</h1>
-	<img src="{{ url_for('return_image', img_id=img) }}">
+	<div class="page-header">
+		<h1>{{ name }}</h1>
+	</div>
+	<div class="container">
+		<img class="img-rounded" id="img-display" alt="Oops. We couldn't load that picture :(" src="{{ url_for('return_image', img_id=img) }}">
+		<p>{{ desc }}</p>
+	</div>
 {% endblock %}
