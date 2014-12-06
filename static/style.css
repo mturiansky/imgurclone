@@ -1,0 +1,11 @@
+body {
+	padding-top: 70px;
+}
+
+.form-control {
+	width: 50%;
+}
+
+#form-textarea {
+	height: 100px;
+}

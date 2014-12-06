@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, send_from_directory
+from flask import render_template, redirect, url_for, request, send_from_directory, flash
 from setup import app
 from models import PostHandler as PH
 
@@ -7,7 +7,7 @@ def home():
 	return render_template('index.html')
 
 @app.route('/upload', methods=['GET','POST'])
-def post():
+def upload():
 	if request.method == 'POST':
 		if 'upload_img' in request.files and 'name' in request.form:
 			i = request.files['upload_img']

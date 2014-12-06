@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from setup import app
 from routes import *
 
