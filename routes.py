@@ -30,6 +30,15 @@ def view_image(img_id):
 		return render_template('view.html', name=info[0], desc=info[1], img=img, comms=PH().find_image_comments(img_id))
 	return render_template('oops.html')
 
+@app.route('/comment', methods=['POST'])
+def comment():
+	if 'name' in request.form and 'text' in request.form and 'img_id' in request.form:
+		name = request.form['name']
+		text = request.form['text']
+		img_id = request.form['img_id']
+		PH().add_comment(name,text,img_id)
+		return redirect(url_for('view_image', img_id=img_id))
+
 @app.route('/img/<img_id>')
 def return_image(img_id):
 	return send_from_directory(app.config['UPLOADS_FOLDER'],img_id + ".jpg")
