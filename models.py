@@ -36,7 +36,7 @@ class PostHandler():
 		IP = ImagePost(name,desc)
 		db.session.add(IP)
 		db.session.commit()
-		return os.path.join(app.config['UPLOADS_FOLDER'], str(IP.id))
+		return [os.path.join(app.config['UPLOADS_FOLDER'], str(IP.id) + ".jpg"), str(IP.id)]
 
 	def delete_image(self,id):
 		db.session.delete(ImagePost.query.get(id))

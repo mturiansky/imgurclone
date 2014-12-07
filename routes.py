@@ -17,7 +17,9 @@ def upload():
 			else:
 				desc = ""
 			img = PH().post_image(name,desc)
-			i.save(img)
+			i.save(img[0])
+			flash("Image uploaded successfully!")
+			return redirect(url_for('view_image', img_id=img[1]))
 	return render_template('upload.html')
 
 @app.route('/view/<img_id>')
@@ -30,4 +32,4 @@ def view_image(img_id):
 
 @app.route('/img/<img_id>')
 def return_image(img_id):
-	return send_from_directory(app.config['UPLOADS_FOLDER'],img_id)
+	return send_from_directory(app.config['UPLOADS_FOLDER'],img_id + ".jpg")
