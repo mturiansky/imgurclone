@@ -50,6 +50,9 @@ class PostHandler():
 		img = ImagePost.query.get(id)
 		return [img.name, img.description]
 
+	def find_image_comments(self,id):
+		return ImagePost.query.get(id).comments
+
 	def add_comment(self,name,text,img_id):
 		db.session.add(ImageComment(name,text,ImagePost.query.get(img_id)))
 		db.session.commit()

@@ -3,8 +3,16 @@
 	<div class="page-header">
 		<h1>{{ name }}</h1>
 	</div>
-	<div class="container">
-		<img class="img-rounded" id="img-display" alt="Oops. We couldn't load that picture :(" src="{{ url_for('return_image', img_id=img) }}">
-		<p>{{ desc }}</p>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<img class="img-rounded" id="img-display" alt="Oops. We couldn't load that picture :(" src="{{ url_for('return_image', img_id=img) }}">
+		</div>
+		<div class="panel-footer">{{ desc }}</div>
 	</div>
+	<h3>Comments:</h3>
+	<table class="table">
+	{% for comm in comms %}
+		<tr><td id="table-small"><strong>{{ comm.name }}</td></strong><td>{{ comm.text }}</td></tr>
+	{% endfor %}
+	</table>
 {% endblock %}

@@ -11,10 +11,22 @@
 	width: 50%;
 }
 
+.panel {
+	text-align: center;
+}
+
+.panel-footer {
+	text-align: left;
+}
+
 #img-display {
 	width: 75%;
 }
 
 #form-textarea {
 	height: 100px;
+}
+
+#table-small {
+	width: 150px;
 }

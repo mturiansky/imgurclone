@@ -27,7 +27,7 @@ def view_image(img_id):
 	img = PH().find_image(img_id)
 	if img:
 		info = PH().find_image_info(img_id)
-		return render_template('view.html', name=info[0], desc=info[1], img=img)
+		return render_template('view.html', name=info[0], desc=info[1], img=img, comms=PH().find_image_comments(img_id))
 	return render_template('oops.html')
 
 @app.route('/img/<img_id>')
