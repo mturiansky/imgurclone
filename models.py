@@ -42,6 +42,10 @@ class PostHandler():
 			thumbs.append(a)
 		return thumbs
 
+	def get_random_image(self):
+		lim = ImagePost.query.count()
+		return int(lim*random())+1
+
 	def post_image(self,name,desc):
 		IP = ImagePost(name,desc)
 		db.session.add(IP)

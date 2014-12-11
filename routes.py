@@ -42,3 +42,7 @@ def comment():
 @app.route('/img/<img_id>')
 def return_image(img_id):
 	return send_from_directory(app.config['UPLOADS_FOLDER'],img_id + ".jpg")
+
+@app.route('/random')
+def random_image():
+	return redirect(url_for('view_image', img_id=PH().get_random_image()))
