@@ -4,7 +4,7 @@ from models import PostHandler as PH
 
 @app.route('/')
 def home():
-	return render_template('index.html')
+	return render_template('index.html', thumbs=PH().get_thumbs())
 
 @app.route('/upload', methods=['GET','POST'])
 def upload():

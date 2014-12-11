@@ -1,5 +1,6 @@
 from setup import app, db
 from datetime import datetime
+from random import random
 import os
 
 class ImagePost(db.Model):
@@ -31,6 +32,15 @@ class PostHandler():
 	def make_db(self):
 		print "[*] Creating database!"
 		db.create_all()
+
+	def get_thumbs(self):
+		thumbs = []
+		lim = ImagePost.query.count()
+		for i in range(12) if 12 < lim else range(lim):
+			a = int(lim*random())+1
+			while a in thumbs: a = int(lim*random())+1
+			thumbs.append(a)
+		return thumbs
 
 	def post_image(self,name,desc):
 		IP = ImagePost(name,desc)

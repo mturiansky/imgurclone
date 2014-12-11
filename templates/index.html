@@ -9,5 +9,7 @@
 	<div class="page-header">
 		<h1>Recent Uploads</h1>
 	</div>
-	<img data-src="" class="img-thumbnail" alt="Oops we couldn't find this image :(">
+	{% for thumb in thumbs %}
+		<a href="{{ url_for('view_image', img_id=thumb) }}" class="thumbnail"><img src="{{ url_for('return_image', img_id=thumb) }}" class="thumb-img" alt="Oops we couldn't find this image :("></a>
+	{% endfor %}
 {% endblock %}
