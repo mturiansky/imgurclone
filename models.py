@@ -36,7 +36,7 @@ class PostHandler():
 	def get_thumbs(self):
 		thumbs = []
 		lim = ImagePost.query.count()
-		for i in range(12) if 12 < lim else range(lim):
+		for i in range(15) if 15 < lim else range(lim):
 			a = int(lim*random())+1
 			while a in thumbs: a = int(lim*random())+1
 			thumbs.append(a)
