@@ -41,7 +41,7 @@
 	<div class="container theme-showcase" role="main">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% for category,message in messages %}
-        <div class="alert alert-{{ category }}" role="alert">
+        <div class="alert alert-{{ category }} alert-hider" role="alert">
           <strong>Message: </strong>{{ message }}
         </div>
       {% endfor %}

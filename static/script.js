@@ -12,4 +12,8 @@ $(document).ready(function() {
 			img.height(200);
 		}
 	});
+
+	$('.alert-hider').each(function() {
+		$(this).delay(2000).fadeOut();
+	});
 });
