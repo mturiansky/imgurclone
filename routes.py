@@ -18,7 +18,7 @@ def upload():
 				desc = ""
 			img = PH().post_image(name,desc)
 			i.save(img[0])
-			flash("Image uploaded successfully!")
+			flash("Image uploaded successfully!",'success')
 			return redirect(url_for('view_image', img_id=img[1]))
 	return render_template('upload.html')
 
@@ -39,10 +39,16 @@ def comment():
 		PH().add_comment(name,text,img_id)
 		return redirect(url_for('view_image', img_id=img_id))
 
+@app.route('/search')
+def search_image():
+	if 'q' in request.args:
+		return render_template('search.html', results=PH().search_db(request.args['q']))
+
 @app.route('/img/<img_id>')
 def return_image(img_id):
 	return send_from_directory(app.config['UPLOADS_FOLDER'],img_id + ".jpg")
 
 @app.route('/random')
 def random_image():
+	flash("This is a random image! Enjoy!",'info')
 	return redirect(url_for('view_image', img_id=PH().get_random_image()))

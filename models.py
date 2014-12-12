@@ -46,6 +46,14 @@ class PostHandler():
 		lim = ImagePost.query.count()
 		return int(lim*random())+1
 
+	def search_db(self,search_str):
+		results = []
+		#good enough for now, needs improvement
+		for res in ImagePost.query.all():
+			if (search_str in res.name or search_str in res.description) and res not in results:
+				results.append(res)
+		return results
+
 	def post_image(self,name,desc):
 		IP = ImagePost(name,desc)
 		db.session.add(IP)
