@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+	<div class="page-header">
+		<h1>Please Log In.</h1>
+	</div>
+	<div class="container">
+		<form role="form" action="" method="post">
+			<div class="form-group">
+				<label for="name">Username</label>
+				<input class="form-control" type="text" name="name" placeholder="username">
+			</div>
+			<div class="form-gorup">
+				<label for="password">Password</label>
+				<input class="form-control" type="password" name="password" placeholder="password">
+			</div><br>
+			<div class="form-group">
+				<input type="checkbox" name="remember"> Remember?
+			</div>
+			<button type="submit" class="btn btn-primary">Log In</button>
+		</form>
+	</div>
+{% endblock %}
