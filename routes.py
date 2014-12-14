@@ -7,6 +7,13 @@ from models import PostHandler as PH
 def home():
 	return render_template('index.html', thumbs=PH().get_thumbs())
 
+@app.route('/user/<username>')
+def user_page(username):
+	user = PH().find_user_by_name(username)
+	if user:
+		return render_template('userpage.html', user=user)
+	return render_template('oops.html')
+
 @login_required
 @app.route('/upload', methods=['GET','POST'])
 def upload():

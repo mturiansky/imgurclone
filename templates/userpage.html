@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+	<div class="page-header">
+		<h1>{{ user.name }}</h1>
+	</div>
+
+	<h2>Recent Posts</h2>
+	<table class="container">
+		<tr>
+		{% set count = 1 %}
+		{% for img in user.pictures %}
+			{% if count > 5 %}{% set count = 1 %}</tr><tr>{% endif %}
+			<td><a href="{{ url_for('view_image', img_id=img.id) }}" class="thumbnail"><img src="{{ url_for('return_image', img_id=img.id) }}" class="thumb-img" alt="Oops we couldn't find this image :("></a></td>
+			{% set count = count + 1 %}
+		{% endfor %}
+		</tr>
+	</table>
+
+	<h2>Recent Comments</h2>
+	<table class="container table">
+		<tr><td id="table-small">Image</td><td>Comment</td></tr>
+		{% for cmt in user.comments %}
+			<tr><td id="table-small"><a href="{{ url_for('view_image', img_id=cmt.img.id) }}">{{ cmt.img.name }}</a></td><td>{{ cmt.text }}</td></tr>
+		{% endfor %}
+	</table>
+{% endblock %}

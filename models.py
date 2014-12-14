@@ -40,7 +40,7 @@ class ImagePost(db.Model):
 class ImageComment(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	user = db.relationship('User', backref=db.backref('users', lazy='dynamic'))
+	user = db.relationship('User', backref=db.backref('comments', lazy='dynamic'))
 	date = db.Column(db.String(80))
 	text = db.Column(db.String(140))
 	img_id = db.Column(db.Integer, db.ForeignKey('image_post.id'))
@@ -69,6 +69,10 @@ class PostHandler():
 
 	def find_user(self,id):
 		return User.query.get(id)
+
+	def find_user_by_name(self,name):
+		u = User.query.filter_by(name=name).first()
+		return u if u else None
 
 	def verify_user(self,username,password):
 		u = User.query.filter_by(name=username).first()
