@@ -7,21 +7,20 @@
 		<div class="panel-body">
 			<img class="img-rounded" id="img-display" alt="Oops. We couldn't load that picture :(" src="{{ url_for('return_image', img_id=img) }}">
 		</div>
-		<div class="panel-footer">{{ desc }}</div>
+		<div class="panel-footer">
+			<p><strong>Tags: </strong>{{ tags }}</p>
+			<p><strong>Description: </strong>{{ desc }}</p>
+		</div>
 	</div>
 	<h3>Comments:</h3>
 	<table class="table">
 	{% for comm in comms %}
-		<tr><td id="table-small"><strong>{{ comm.name }}</td></strong><td>{{ comm.text }}</td></tr>
+		<tr><td id="table-small"><strong>{{ comm.user.name }}</td></strong><td>{{ comm.text }}</td></tr>
 	{% endfor %}
 	</table>
 	<form role="form" action="{{ url_for('comment') }}" method="post">
 		<div class="form-group">
-			<label for="name">Upload Name</label>
-			<input class="form-control" type="text" name="name" placeholder="name">
-		</div>
-		<div class="form-group">
-			<label for="comment">Upload Description</label>
+			<label for="comment">Comment</label>
 			<textarea class="form-control" id="form-textarea" name="text" placeholder="comment"></textarea>
 		</div>
 		<input type="hidden" name="img_id" value="{{ img }}">

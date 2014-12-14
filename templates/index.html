@@ -15,7 +15,7 @@
 		<tr>
 		{% set count = 1 %}
 		{% for thumb in thumbs %}
-			{% if count > 5 %}</tr><tr>{% endif %}
+			{% if count > 5 %}{% set count = 1 %}</tr><tr>{% endif %}
 			<td><a href="{{ url_for('view_image', img_id=thumb) }}" class="thumbnail"><img src="{{ url_for('return_image', img_id=thumb) }}" class="thumb-img" alt="Oops we couldn't find this image :("></a></td>
 			{% set count = count + 1 %}
 		{% endfor %}
