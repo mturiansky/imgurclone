@@ -14,8 +14,8 @@ def user_page(username):
 		return render_template('userpage.html', user=user)
 	return abort(404)
 
-@login_required
 @app.route('/upload', methods=['GET','POST'])
+@login_required
 def upload():
 	if request.method == 'POST':
 		if 'upload_img' in request.files and 'name' in request.form:
@@ -44,8 +44,9 @@ def view_image(img_id):
 	flash('Oh no! This isn\'t right!', 'danger')
 	return abort(404)
 
-@login_required
+
 @app.route('/comment', methods=['POST'])
+@login_required
 def comment():
 	if 'text' in request.form and 'img_id' in request.form:
 		user = current_user

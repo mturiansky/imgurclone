@@ -13,6 +13,7 @@ db = SQLAlchemy(app)
 lm = LoginManager()
 lm.login_view = "login"
 lm.login_message = "Please log in to access this content."
+lm.login_message_category = 'danger'
 AnonymousUserMixin.name = u'Anonymous'
 lm.anonymous_user = AnonymousUserMixin
 lm.setup_app(app)
