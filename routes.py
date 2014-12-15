@@ -2,6 +2,8 @@ from flask import render_template, redirect, url_for, request, send_from_directo
 from flask.ext.login import current_user, login_required, login_user, logout_user
 from setup import app, lm
 from models import PostHandler as PH
+import requests
+import os
 
 @app.route('/')
 def home():
@@ -29,21 +31,25 @@ def upload():
 				tags = request.form['tags']
 			else:
 				tags = ""
-			img = PH().post_image(name,desc,current_user,tags)
-			i.save(img[0])
+			loc = PH().get_next_url()
+			img = PH().post_image(name,desc,loc,current_user,tags)
+			temp = os.path.join(app.config['UPLOADS_FOLDER'],img + '.jpg')
+			i.save(temp)
+			values = {'name':str(img), 'secret_key':'blah'}
+			files = {'img':open(temp,'rb')}
+			requests.post(loc, data=values, files=files)
+			os.remove(temp)
 			flash("Image uploaded successfully!",'success')
-			return redirect(url_for('view_image', img_id=img[1]))
+			return redirect(url_for('view_image', img_id=img))
 	return render_template('upload.html')
 
-@app.route('/view/<img_id>')
+@app.route('/view/<int:img_id>')
 def view_image(img_id):
 	img = PH().find_image(img_id)
 	if img:
-		info = PH().find_image_info(img_id)
-		return render_template('view.html', name=info[0], desc=info[1], img=img, comms=PH().find_image_comments(img_id), tags=PH().find_image_tags(img_id))
+		return render_template('view.html', img=img, tags=PH().find_image_tags(img.id))
 	flash('Oh no! This isn\'t right!', 'danger')
 	return abort(404)
-
 
 @app.route('/comment', methods=['POST'])
 @login_required
@@ -67,7 +73,7 @@ def return_image(img_id):
 @app.route('/random')
 def random_image():
 	flash("This is a random image! Enjoy!",'info')
-	return redirect(url_for('view_image', img_id=PH().get_random_image()))
+	return redirect(url_for('view_image', img=PH().get_random_image()))
 
 @app.route('/login', methods=['GET','POST'])
 def login():

@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
 	<div class="page-header">
-		<h1>{{ name }}</h1>
+		<h1>{{ img.name }}</h1>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<img class="img-rounded" id="img-display" alt="Oops. We couldn't load that picture :(" src="{{ url_for('return_image', img_id=img) }}">
+			<img class="img-rounded" id="img-display" alt="Oops. We couldn't load that picture :(" src="{{ img.location ~ img.id }}">
 		</div>
 		<div class="panel-footer">
 			<p><strong>Tags: </strong>{{ tags }}</p>
-			<p><strong>Description: </strong>{{ desc }}</p>
+			<p><strong>Description: </strong>{{ img.description }}</p>
 		</div>
 	</div>
 	<h3>Comments:</h3>
 	<table class="table">
-	{% for comm in comms %}
+	{% for comm in img.comments %}
 		<tr><td id="table-small"><strong>{{ comm.user.name }}</td></strong><td>{{ comm.text }}</td></tr>
 	{% endfor %}
 	</table>
@@ -23,7 +23,7 @@
 			<label for="comment">Comment</label>
 			<textarea class="form-control" id="form-textarea" name="text" placeholder="comment"></textarea>
 		</div>
-		<input type="hidden" name="img_id" value="{{ img }}">
+		<input type="hidden" name="img_id" value="{{ img.id }}">
 		<button type="submit" class="btn btn-primary">Comment!</button>
 	</form>
 {% endblock %}

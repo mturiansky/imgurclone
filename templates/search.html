@@ -11,7 +11,7 @@
 		</tr>
 		{% for result in results %}
 		<tr>
-			<td><a href="{{ url_for('view_image', img_id=result.id) }}" class="thumbnail"><img src="{{ url_for('return_image', img_id=result.id) }}" class="thumb-img" alt="Oops we couldn't find this image :("></a></td>
+			<td><a href="{{ url_for('view_image', img_id=result.id) }}" class="thumbnail"><img src="{{ result.location + result.id }}" class="thumb-img" alt="Oops we couldn't find this image :("></a></td>
 			<td id="table-medium"><strong>{{ result.name }}</strong></td>
 			<td>{{ result.description }}</td>
 		</tr>
