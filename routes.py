@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, send_from_directory, flash
+from flask import render_template, redirect, url_for, request, send_from_directory, flash, abort
 from flask.ext.login import current_user, login_required, login_user, logout_user
 from setup import app, lm
 from models import PostHandler as PH
@@ -12,7 +12,7 @@ def user_page(username):
 	user = PH().find_user_by_name(username)
 	if user:
 		return render_template('userpage.html', user=user)
-	return render_template('oops.html')
+	return abort(404)
 
 @login_required
 @app.route('/upload', methods=['GET','POST'])
@@ -42,7 +42,7 @@ def view_image(img_id):
 		info = PH().find_image_info(img_id)
 		return render_template('view.html', name=info[0], desc=info[1], img=img, comms=PH().find_image_comments(img_id), tags=PH().find_image_tags(img_id))
 	flash('Oh no! This isn\'t right!', 'danger')
-	return render_template('oops.html')
+	return abort(404)
 
 @login_required
 @app.route('/comment', methods=['POST'])
